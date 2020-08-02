@@ -1,5 +1,6 @@
-kafkaDir='/Users/alscott/RedHatTech/kafka_2.12-2.5.0.redhat-00003'
-cd $ kafkaDir
+kafkaDir=$HOME'/RedHatTech/kafka_2.12-2.5.0.redhat-00003'
+echo "Directory: "$kafkaDir
+cd $kafkaDir
 
 ## HL7
 bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic mctn_mms_adt &
