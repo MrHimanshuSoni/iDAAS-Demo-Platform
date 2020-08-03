@@ -20,5 +20,5 @@ bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-fac
 ## FHIR Third Party Server Integration
 ## Enterprise Level Topics by Message Trigger
 ## Application: Integration with Partner FHIR Server
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic fhirsvr_codeSystem &
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic ent_fhirsvr_codeSystem &
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic fhirsvr_codesystem &
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic ent_fhirsvr_codesystem &

@@ -5,7 +5,6 @@ cd $kafkaDir
 ## FHIR Third Party Server Integration
 ## Enterprise Level Topics by Message Trigger
 ## Application: Integration with Partner FHIR Server
-bin/kafka-topics.sh --delete --topic fhirsvr_codeSystem &
 bin/kafka-topics.sh --delete --topic mctn_mms_adt &
 ## Facility By Application by Message Trigger
 ## Facility: MCTN
@@ -19,3 +18,7 @@ bin/kafka-topics.sh --delete --topic mms_adt &
 ## Enterprise by Message Trigger
 ## Application: MMS
 bin/kafka-topics.sh --delete --topic ent_adt &
+
+
+bin/kafka-topics.sh --delete --topic fhirsvr_codesystem &
+bin/kafka-topics.sh --delete --topic ent_fhirsvr_codesystem &

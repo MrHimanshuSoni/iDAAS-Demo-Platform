@@ -90,7 +90,7 @@ public class CamelConfiguration extends RouteBuilder {
         .setHeader("exchangeID").exchangeProperty("exchangeID")
         .setHeader("internalMsgID").exchangeProperty("internalMsgID")
         .setHeader("bodyData").exchangeProperty("bodyData")
-        .convertBodyTo(String.class).to("kafka://localhost:9092?topic=opsMgmt_PlatformTransactions&brokers=localhost:9092")
+        .convertBodyTo(String.class).to("kafka://localhost:9092?topic=opsmgmt_platformtransactions&brokers=localhost:9092")
     ;
     /*
     *  Logging
@@ -130,7 +130,7 @@ public class CamelConfiguration extends RouteBuilder {
           // iDAAS DataHub Processing
           .wireTap("direct:auditing")
           // Send to Topic
-          .convertBodyTo(String.class).to("kafka://localhost:9092?topic=MCTN_MMS_ADT&brokers=localhost:9092")
+          .convertBodyTo(String.class).to("kafka://localhost:9092?topic=mctn_mms_adt&brokers=localhost:9092")
           //Response to HL7 Message Sent Built by platform
           .transform(HL7.ack())
           // This would enable persistence of the ACK to the auditing tier
@@ -254,18 +254,22 @@ public class CamelConfiguration extends RouteBuilder {
     /*
      *  Healthcare data distribution for FHIR
      */
-    from("kafka:intgrtnfhirsvr_consent?brokers=localhost:9092")
+    from("kafka:fhirsvr_consent?brokers=localhost:9092")
         .routeId("enrollmentrequest-MiddleTier")
         .setProperty("processingtype").constant("data")
         .setProperty("appname").constant("iDAAS-ConnectFinancial-IndustryStd")
         .setProperty("industrystd").constant("HL7")
         .setProperty("messagetrigger").constant("enrollmentrequest")
         .setProperty("component").simple("${routeId}")
+        .setProperty("camelID").simple("${camelId}")
+        .setProperty("exchangeID").simple("${exchangeId}")
+        .setProperty("internalMsgID").simple("${id}")
+        .setProperty("bodyData").simple("${body}")
         .setProperty("processname").constant("MTier")
         .setProperty("auditdetails").constant("enrollmentrequest to Enterprise By Data Type middle tier")
         .wireTap("direct:auditing")
         // Enterprise Message By Type
-        .to("kafka:ent_intgrtnfhirsvr_consent?brokers=localhost:9092")
+        .to("kafka:ent_fhirsvr_consent?brokers=localhost:9092")
     ;
 
 
